@@ -1,0 +1,3 @@
+O: giraffe
+X: whitegoat
+giraffe returns invalid output "[]"

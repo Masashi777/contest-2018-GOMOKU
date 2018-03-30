@@ -1,0 +1,3 @@
+O: giraffe
+X: sample_hard
+giraffe returns invalid output "[]"

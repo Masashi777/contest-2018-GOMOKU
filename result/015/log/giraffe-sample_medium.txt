@@ -1,0 +1,3 @@
+O: giraffe
+X: sample_medium
+giraffe returns invalid output "[]"
