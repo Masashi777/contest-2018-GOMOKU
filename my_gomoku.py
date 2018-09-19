@@ -7,7 +7,6 @@ N = 15
 # output: int[2] : where to put a stone in this turn.
 def Think(field):
     CENTER = (int(N / 2), int(N / 2))
-
     best_position = (0, 0)
     for i in range(N):
         for j in range(N):
@@ -15,8 +14,10 @@ def Think(field):
                 continue
 
             position = (i, j)
+
             # Assume to put a stone on (i, j).
             field[i][j] = 'O'
+
             #ごれんちゃんが完成するかを判定、そうでなかったら中心に近いところにおく
             if CanHaveFiveStones(field, position,5):
                 DebugPrint('I have a winning choice at (%d, %d)' % (i, j))
@@ -25,8 +26,9 @@ def Think(field):
                 return position
             if CanHaveFiveStones(field, position,3):
                 return position
-            if CanHaveFiveStones(field, position,2):
-                return position
+            #if CanHaveFiveStones(field, position,2):
+            #    return position
+
 
             # Revert the assumption.
             field[i][j] = '.'
@@ -41,6 +43,12 @@ def CanHaveFiveStones(field, position,n):
             CountStonesOnLine(field, position, (1, 0)) >= n or
             CountStonesOnLine(field, position, (1, -1)) >= n or
             CountStonesOnLine(field, position, (0, 1)) >= n)
+
+def CanHaveFiveStonesonX(field, position,n):
+    return (CountXOnLine(field, position, (1, 1)) >= n or
+            CountXOnLine(field, position, (1, 0)) >= n or
+            CountXOnLine(field, position, (1, -1)) >= n or
+            CountXOnLine(field, position, (0, 1)) >= n)
 
 
 
@@ -61,6 +69,29 @@ def CountStonesOnLine(field, position, diff):
     col = position[1] - diff[1]
     while True:
         if row < 0 or col < 0 or row >= N or col >= N or field[row][col] != 'O':
+            break
+        row -= diff[0]
+        col -= diff[1]
+        count += 1
+
+    return count
+
+def CountXOnLine(field, position, diff):
+    count = 0
+
+    row = position[0]
+    col = position[1]
+    while True:
+        if row < 0 or col < 0 or row >= N or col >= N or field[row][col] != 'X':
+            break
+        row += diff[0]
+        col += diff[1]
+        count += 1
+
+    row = position[0] - diff[0]
+    col = position[1] - diff[1]
+    while True:
+        if row < 0 or col < 0 or row >= N or col >= N or field[row][col] != 'X':
             break
         row -= diff[0]
         col -= diff[1]
