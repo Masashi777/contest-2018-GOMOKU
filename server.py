@@ -82,7 +82,7 @@ class Player(object):
 
     @property
     def command(self):
-        return 'python ' + self.path
+        return 'pytho3 ' + self.path
 
 
 class Gomoku(object):
