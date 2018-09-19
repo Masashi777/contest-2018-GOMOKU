@@ -22,8 +22,8 @@ def Think(field):
                 return position
             # Revert the assumption.
             field[i][j] = '.'
-            if GetDistance(best_position, CENTER) > GetDistance(position, CENTER):
-                best_position = position
+            # if GetDistance(best_position, CENTER) > GetDistance(position, CENTER):
+            #     best_position = position
 
             for n in reversed(range(5)):
                 if CanHaveStones(field, position, n):
