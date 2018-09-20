@@ -98,6 +98,58 @@ def CountXOnLine(field, position, diff):
         count += 1
 
     return count
+    
+
+def Hantei(field, pisition, char):
+    count, countA
+
+    row = position[0]
+    col = position[1]
+
+    while True:
+        if row < 0 or col < 0 or row >= N or col >= N or field[row][col] != char or count == 4:
+            break
+
+        row += diff[0]
+        col += diff[1]
+        count += 1
+        countA += 1
+
+    row = position[0] - diff[0]
+    col = position[1] - diff[1]
+
+    while True:
+        if row < 0 or col < 0 or row >= N or col >= N or field[row][col] != char or count == 4:
+            break
+
+        row -= diff[0]
+        col -= diff[1]
+        count += 1
+
+    # 阻止か攻撃かを判定
+    if count == 4 and countA == 4:
+        # 阻止する
+        row = position[0]
+        col = position[1]
+
+        for x in range(4):
+            row += diff[0]
+            col += diff[1]
+
+        return (row, col)
+
+    elif count == 4 and countA == 1:
+        # 阻止する
+        row = position[0] - diff[0]
+        col = position[1] - diff[1]
+
+        for x in range(4):
+            row -= diff[0]
+            col -= diff[1]
+
+    else:
+        # 阻止する必要なし
+        return None
 
 
 # Returns the Manhattan distance from |a| to |b|.
