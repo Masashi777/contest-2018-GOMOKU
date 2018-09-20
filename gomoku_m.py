@@ -56,7 +56,7 @@ def Think(field):
             # 4つを阻止
         else:
             # 3つを阻止
-            
+
     else:
         # 攻撃
 
